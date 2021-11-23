@@ -1,0 +1,17 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/storage
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/bootstrap/cache/*.php
+bootstrap/cache/pacCA6.tmp
+bootstrap/cache/pacCA6.tmp
+bootstrap/cache/pac1ADC.tmp
