@@ -188,6 +188,8 @@ return [
         Yajra\DataTables\ButtonsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Alexusmai\LaravelFileManager\FileManagerServiceProvider::class,
+        Brian2694\Toastr\ToastrServiceProvider::class,
+
 
     ],
 
@@ -244,6 +246,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
+
 
     ],
 

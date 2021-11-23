@@ -36,6 +36,8 @@
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="/assets/admin/css/font-awesome.min.css">
     
+    <!-- toastr CSS -->
+    <link rel="stylesheet" href="/assets/admin/css/toastr.min.css">
     <!-- Feathericon CSS -->
     <link rel="stylesheet" href="/assets/admin/css/feathericon.min.css">
     
@@ -82,8 +84,6 @@
         @include('admin.layouts.header')
         @include('admin.layouts.sidebar')
         
-        
-        
         <!-- Page Wrapper -->
         <div class="page-wrapper">
             <div class="content container-fluid">
@@ -91,52 +91,10 @@
             </div>
         </div>
 
-
-            <div class="msg">
-        
-            </div>
-
-
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success bg-success alert-dismissible text-white border-0 fade show" role="alert">
-                    <span>{{ $message }}</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @elseif($message = Session::get('warning'))
-                <div class="alert alert-warning bg-warning alert-dismissible text-white border-0 fade show" role="alert">
-                    <span>{{ $message }}</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @elseif($message = Session::get('danger'))
-                <div class="alert alert-danger bg-danger alert-dismissible text-white border-0 fade show" role="alert">
-                    <span>{{ $message }}</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @elseif($message = Session::get('info'))
-                <div class="alert alert-info bg-info alert-dismissible text-white border-0 fade show" role="alert">
-                    <span>{{ $message }}</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-            
-        </div>
-        <!-- /Page Wrapper -->
-    
     </div>
     <!-- /Main Wrapper -->
 
 
-    
-
-    
     <!-- Bootstrap Core JS -->
     <script src="/assets/admin/js/popper.min.js"></script>
     <script src="/assets/admin/js/bootstrap.min.js"></script>
@@ -156,6 +114,10 @@
     <script src="/assets/admin/plugins/raphael/raphael.min.js"></script>    
     <script src="/assets/admin/plugins/morris/morris.min.js"></script>  
     <script src="/assets/admin/js/chart.morris.js"></script>
+
+    <!-- toastr JS -->
+    <script src="/assets/admin/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
     
     <!-- Custom JS -->
     <script  src="/assets/admin/js/script.js"></script>

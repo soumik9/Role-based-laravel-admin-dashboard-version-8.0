@@ -9,7 +9,8 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use DB;
-use Hash;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Hash;
 use DataTables;
 use Image; 
 use Storage;
@@ -156,7 +157,7 @@ class UserController extends Controller
 
 	public function create()
 	{
-		$roles = Role::pluck('name','name')->all();
+		$roles = Role::all();
 		return view('admin.users.create',compact('roles'));
 	}
 
@@ -168,38 +169,39 @@ class UserController extends Controller
 			'password' 		=> 'required|same:confirm-password',
 			'roles' 		=> 'required',
 			'mobile' 		=> 'required|string|unique:users,mobile',
-			'image' 		=> 'required',
+			'image' 		=> 'nullable',
         ];
 
         $messages = [
-            'name.required'    		=> __('user.form.validation.name.required'),
-            'email.required'    	=> __('user.form.validation.email.required'),
-            'email.email'    		=> __('user.form.validation.email.email'),
-            'email.unique'    		=> __('user.form.validation.email.unique'),
-            'password.required'    	=> __('user.form.validation.password.required'),
-            'password.same'    		=> __('user.form.validation.password.same'),
-            'roles.required'    	=> __('user.form.validation.roles.required'),
-            'mobile.required'    	=> __('user.form.validation.mobile.required'),
-            'image.required'    	=> __('user.form.validation.image.required'),
+            'name.required'    		=> __('default.form.validation.name.required'),
+            'email.required'    	=> __('default.form.validation.email.required'),
+            'email.email'    		=> __('default.form.validation.email.email'),
+            'email.unique'    		=> __('default.form.validation.email.unique'),
+            'password.required'    	=> __('default.form.validation.password.required'),
+            'password.same'    		=> __('default.form.validation.password.same'),
+            'roles.required'    	=> __('default.form.validation.roles.required'),
+            'mobile.required'    	=> __('default.form.validation.mobile.required'),
         ];
 
 
         $this->validate($request, $rules, $messages);
-
 		$input = request()->all();
-
 		$input['password'] = Hash::make($input['password']);
 
 		try {
 			$user = User::create($input);
-			$user->assignRole($request->input('roles'));
 
-			$success_msg = __('user.message.store.success');
-			return redirect()->route('users.index')->with('success',$success_msg);
+			if($request->roles)
+            {
+				$user->assignRole($request->input('roles'));
+			}
+
+			Toastr::success(__('user.message.store.success'));
+		    return redirect()->route('users.index');
 
 		} catch (Exception $e) {
-			$error_msg = __('user.message.store.error');
-			return redirect()->route('users.index')->with('error',$error_msg);
+			Toastr::error(__('user.message.store.error'));
+		    return redirect()->route('users.index');
 		}
 
 	}
