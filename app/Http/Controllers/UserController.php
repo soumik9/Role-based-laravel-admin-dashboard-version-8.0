@@ -91,7 +91,7 @@ class UserController extends Controller
                     }
 
                     if (Gate::check('user-delete')) {
-                        $delete = '<button class="remove-user custom-delete-btn" data-id="'.$row->id.'" data-action="'.route('users.destroy').'">
+                        $delete = '<button class="custom-delete-btn remove-user" data-id="'.$row->id.'" data-action="'.route('users.destroy').'">
 										<i class="fe fe-trash"></i>
 		                                '.__('default.form.delete-button').'
 									</button>';
@@ -140,7 +140,6 @@ class UserController extends Controller
         }
       
         return view('admin.users.index');
-   
 	}
 
 	public function create()
@@ -170,7 +169,6 @@ class UserController extends Controller
             'roles.required'    	=> __('default.form.validation.roles.required'),
             'mobile.required'    	=> __('default.form.validation.mobile.required'),
         ];
-
 
         $this->validate($request, $rules, $messages);
 		$input = request()->all();

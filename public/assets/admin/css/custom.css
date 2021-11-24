@@ -73,14 +73,16 @@
     color: #fff;
 }
 .custom-delete-btn{
-    padding: .14rem .5rem !important;
+    padding: .15rem .5rem .10rem .5rem !important;
     font-size: .875rem;
     line-height: 1.5;
     border-radius: .2rem;
     color: #fff;
     background-color: #E0001A;
     border-color: #E0001A;
+    outline: none;
 }
+
 .custom-delete-btn:hover{
     color: #fff;
 }

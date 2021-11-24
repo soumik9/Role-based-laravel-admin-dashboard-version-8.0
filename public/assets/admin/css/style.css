@@ -868,8 +868,9 @@ button.bg-danger:hover {
 	box-shadow: unset;
 }
 .page-item.active .page-link {
-	background-color: #c4ab54;
-	border-color: #c4ab54;
+	/* background-color: #c4ab54; */
+	background-color: #006266;
+	border-color: #006266;
 }
 .dropdown-menu {
 	border: 1px solid rgba(0, 0, 0, 0.1);
@@ -879,7 +880,8 @@ button.bg-danger:hover {
 	background-color: #fff;
 }
 .dropdown-item.active, .dropdown-item:active {
-    background-color: #c4ab54;
+    /* background-color: #c4ab54; */
+	background-color: #006266;
 }
 .navbar-nav .open .dropdown-menu {
 	border: 0;
@@ -1495,7 +1497,8 @@ button.bg-danger:hover {
 }
 .user-menu .dropdown-menu .dropdown-item:hover {
 	color: #fff;
-    background: #c4ab54;
+    /* background: #c4ab54; */
+    background: #006266;
 }
 .header .dropdown-menu > li > a:focus,
 .header .dropdown-menu > li > a:hover {
@@ -1699,29 +1702,39 @@ html.menu-opened body {
 	position: relative;
 }
 .sidebar-menu li a {
-	color: #c4ab54;
+	/* color: #c4ab54; */
+	color: #3c6382 !important;
 	display: block;
 	font-size: 16px;
 	height: auto;
 	padding: 0 20px;
 }
 .sidebar-menu li a:hover {
-    color: #5ae8ff;
+    /* color: #5ae8ff; */
+	color: #B53471 !important;
 }
 .sidebar-menu > ul > li > a:hover {
-	background-color: #c4ab54;
-    color: #fff;
+	/* background-color: #c4ab54;
+    color: #fff; */
+	background-color: #006266;
+    color: #fff !important;
 }
-.sidebar-menu > ul > li.active > a:hover {
+/* .sidebar-menu > ul > li.active > a:hover {
     background-color: #19c1dc;
     color: #fff;
-}
+} */
 .sidebar-menu li.active a {
-    background-color: #c4ab54;
-    color: #fff;
+    /* background-color: #c4ab54; */
+	background-color: #006266;
+    color: #fff !important;
+}
+.sidebar-menu ul ul a.active {
+	/* color: #20e3ff;  chnage sub menu active color*/
+	color: #B53471 !important;
 }
 .menu-title {
-    color: #c4ab54;
+    /* color: #c4ab54; */
+	color: #ebebeb;
     display: flex;
     font-size: 14px;
     opacity: 1;
@@ -4222,8 +4235,10 @@ input.error, select.error, textarea.error{
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
-	background: #c4ab54;
-	border-color: #c4ab54;
+	/* background: #c4ab54;
+	border-color: #c4ab54; */
+	background: #006266;
+	border-color: #006266;
     color: #fff !important;
     padding: 3px 15px;
 }

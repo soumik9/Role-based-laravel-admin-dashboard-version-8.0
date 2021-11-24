@@ -9,7 +9,6 @@
         .table tr td {
             vertical-align: middle;
         }
-
     </style>
 @endpush
 
