@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelUserActivity\Traits\Loggable;
 
 
@@ -56,7 +56,6 @@ class User extends Authenticatable
     public function getRoleCodes()
     {
         $user = Auth::user();
-
         return $roles = Role::where('name',$user->getRoleNames())->get();
     }
 }

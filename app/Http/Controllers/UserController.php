@@ -73,7 +73,6 @@ class UserController extends Controller
 
 	public function index(Request $request)
 	{
-		
 		if ($request->ajax()) {
             $data = User::get();
             return Datatables::of($data)
@@ -83,7 +82,7 @@ class UserController extends Controller
                 ->addColumn('action', function($row){
 
 					if (Gate::check('user-edit')) {
-                        $edit = '<a href="'.route('users.edit', $row->id).'" class="btn btn-sm bg-warning-light">
+                        $edit = '<a href="'.route('users.edit', $row->id).'" class="custom-edit-btn mr-1">
                                     <i class="fe fe-pencil"></i>
                                         '.__('default.form.edit-button').'
                                 </a>';
@@ -92,7 +91,7 @@ class UserController extends Controller
                     }
 
                     if (Gate::check('user-delete')) {
-                        $delete = '<button class="remove-user btn btn-sm bg-danger-light" data-id="'.$row->id.'" data-action="'.route('users.destroy').'">
+                        $delete = '<button class="remove-user custom-delete-btn" data-id="'.$row->id.'" data-action="'.route('users.destroy').'">
 										<i class="fe fe-trash"></i>
 		                                '.__('default.form.delete-button').'
 									</button>';
@@ -100,18 +99,11 @@ class UserController extends Controller
                         $delete = '';
                     }
 
-
-
-                    
-
-
                     $action = $edit.' '.$delete;
-
                     return $action;
                 })
 
                 ->addColumn('status', function($row){
-
                 	if ($row->status == 1) {
                 		$current_status = 'Checked';
                 	}else{
@@ -119,25 +111,21 @@ class UserController extends Controller
                 	}
 
                     $status = "
-
                             <input type='checkbox' id='status_$row->id' id='user-$row->id' class='check' onclick='changeUserStatus(event.target, $row->id);' " .$current_status. ">
 							<label for='status_$row->id' class='checktoggle'>checkbox</label>
                     ";
-
                     return $status;
                 })
 
                 ->addColumn('image', function($row){
-                    
-
                     if ($row->image == null or empty($row->image)) {
                     	$image = '<img src="/assets/admin/img/default-user.png" class="w-50 rounded-circle img-fluid img-thumbnail" style="max-width: 50px;">';
                     }else{
-                    	$image = '<img src="'.$row->image.'" class="w-50 rounded-circle img-fluid img-thumbnail" style="max-width: 50px;">';
+                    	$image = '<img src="'.$row->image.'" class="w-50 rounded-circle img-fluid img-thumbnail" style="max-width: 60px; height: 45px;">';
                     }
-
                     return $image;
                 })
+
                 ->rawColumns(['action', 'image'])
 
 	            ->addColumn('role', function ($user) {
@@ -203,16 +191,14 @@ class UserController extends Controller
 			Toastr::error(__('user.message.store.error'));
 		    return redirect()->route('users.index');
 		}
-
 	}
 
 
 	public function edit($id)
 	{
 		$user = User::find($id);
-		$roles = Role::pluck('name','name')->all();
-		$userRole = $user->roles->pluck('name','name')->all();
-		return view('admin.users.edit',compact('user','roles','userRole'));
+		$roles = Role::all();
+		return view('admin.users.edit',compact('user','roles'));
 	}
 
 	public function update(Request $request, $id)
@@ -269,14 +255,13 @@ class UserController extends Controller
 
 	public function destroy()
 	{
-
 		$id = request()->input('id');
-		$alluser = User::all();
-		$countalluser = $alluser->count();
+		$all_user = User::all();
+		$count_all_user = $all_user->count();
 
-		if ($countalluser <= 1) {
-			$warning_msg = __('user.message.destroy.warning_last_user');
-			return redirect()->route('users.index')->with('warning',$warning_msg);
+		if ($count_all_user <= 1) {
+			Toastr::error(__('user.message.store.error'));
+		    return redirect()->route('users.index');
 		}else{
 			$getuser = User::find($id);
 			if(!empty($getuser->image)){
@@ -287,17 +272,13 @@ class UserController extends Controller
 			}
 			try {
 				User::find($id)->delete();
-				$success_msg = __('user.message.destroy.success');
-				return redirect()->route('users.index')->with('success',$success_msg);
+				return back()->with(Toastr::error(__('user.message.destroy.success')));
 			} catch (Exception $e) {
-				$error_msg = __('user.message.destroy.error');
-				return redirect()->route('users.index')->with('error',$error_msg);
+				$error_msg = Toastr::error(__('user.message.destroy.error'));
+				return redirect()->route('users.index')->with($error_msg);
 			}
 		}
-			
 	}
-
-
 
 	public function profile()
 	{
@@ -336,19 +317,17 @@ class UserController extends Controller
 		
 	}
 
-
-
-
-
-
 	public function status_update(Request $request)
 	{
 		$user = User::find($request->id)->update(['status' => $request->status]);
 
-        return response()->json(['success'=>'Status changed successfully.']);
-
+		if($request->status == 1)
+        {
+            return response()->json(['message' => 'Status activated successfully.']);
+        }
+        else{
+            return response()->json(['message' => 'Status deactivated successfully.']);
+        }  
 	}
-
-
 
 }

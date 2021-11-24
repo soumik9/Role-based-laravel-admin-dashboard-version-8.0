@@ -1984,12 +1984,11 @@ html.menu-opened body {
 }
 .page-header {
 	margin-bottom: 1.875rem;
-    position: sticky;
-    top: 60px;
+
     background: #fff;
-    z-index: 9;
-    padding: 15px 15px 10px 15px;
-    box-shadow: 0px 12px 25px -25px #000;
+
+    padding: 0;
+
 }
 .page-header .breadcrumb {
     background-color: transparent;

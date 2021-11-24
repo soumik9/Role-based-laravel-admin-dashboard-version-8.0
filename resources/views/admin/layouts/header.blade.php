@@ -20,7 +20,7 @@
                     </a>
                 @else
                     <a href="{{ route('dashboard') }}" class="logo logo-small">
-                        <img src="/assets/admin/img/logo-def.png" alt="Logo" width="30" height="30">
+                        <img src="/assets/admin/img/favicon-def.png" alt="Logo" width="30" height="30">
                     </a>
                 @endif
             </div>

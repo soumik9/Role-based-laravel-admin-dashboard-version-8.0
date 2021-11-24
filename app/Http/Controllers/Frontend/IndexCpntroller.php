@@ -16,8 +16,6 @@ class IndexCpntroller extends Controller
 
     public function index()
     {
-        $testimonials = Testimonial::where('status', 1)->get();
-        $news         = NewsFeed::where('status', 1)->get();
-        return view('frontend.index', compact('testimonials', 'news'));
+        return view('frontend.index');
     }
 }

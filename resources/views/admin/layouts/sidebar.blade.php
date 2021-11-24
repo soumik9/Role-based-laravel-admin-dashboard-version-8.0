@@ -88,7 +88,7 @@
                                     @can('role-list')
                                         <li>
                                             <a href="{{ route('roles.index') }}" title="{{__('sidebar.roles')}}" class="sidebar-link {{ (request()->is('admin/roles*')) ? 'active' : '' }}">
-                                                <span class="hide-menu">{{__('sidebar.user_role')}}</span>
+                                                <span class="hide-menu">{{__('sidebar.roles')}}</span>
                                             </a>
                                         </li>
                                     @endcan
