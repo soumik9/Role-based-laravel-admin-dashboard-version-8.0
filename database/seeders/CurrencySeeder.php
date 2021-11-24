@@ -15,7 +15,7 @@ class CurrencySeeder extends Seeder
     public function run()
     {
         Currency::create([
-            'name'   => 'Bangladeshi Taaka',
+            'name'   => 'Bangladeshi Taka',
             'code'   => 'BDT',
             'symbol' => '৳',
             'status' => 1

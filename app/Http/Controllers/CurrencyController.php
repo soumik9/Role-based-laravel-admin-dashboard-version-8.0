@@ -51,25 +51,24 @@ class CurrencyController extends Controller
 
 	public function index(Request $request)
 	{
-		
 		if ($request->ajax()) {
             $data = Currency::get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
 					if (Gate::check('currency-edit')) {
-                        $edit = '<a href="'.route('currencies.edit', $row->id).'" class="btn btn-sm bg-warning-light">
+                        $edit = '<a href="'.route('currencies.edit', $row->id).'" class="custom-edit-btn mr-1">
                                     <i class="fe fe-pencil"></i>
-                                        '.__('currency.form.edit-button').'
+                                        '.__('default.form.edit-button').'
                                 </a>';
                     }else{
                         $edit = '';
                     }
 
                     if (Gate::check('currency-delete')) {
-                        $delete = '<button class="remove-currency btn btn-sm bg-danger-light" data-id="'.$row->id.'" data-action="'.route('currencies.destroy').'">
+                        $delete = '<button class="custom-delete-btn remove-currency" data-id="'.$row->id.'" data-action="'.route('currencies.destroy').'">
 										<i class="fe fe-trash"></i>
-		                                '.__('currency.form.delete-button').'
+		                                '.__('default.form.delete-button').'
 									</button>';
                     }else{
                         $delete = '';
@@ -80,31 +79,26 @@ class CurrencyController extends Controller
                 })
 
                 ->addColumn('status', function($row){
-
                 	if ($row->status == 1) {
                 		$current_status = 'Checked';
                 	}else{
                 		$current_status = '';
                 	}
-
                     $status = "
-
                             <input type='checkbox' id='status_$row->id' id='currency-$row->id' class='check' onclick='changecurrenciestatus(event.target, $row->id);' " .$current_status. ">
 							<label for='status_$row->id' class='checktoggle'>checkbox</label>
                     ";
 
                     return $status;
                 })
-                ->rawColumns(['action'])
 
+                ->rawColumns(['action'])
                 ->editColumn('created_at', '{{date("jS M Y", strtotime($created_at))}}')
 	            ->editColumn('updated_at', '{{date("jS M Y", strtotime($updated_at))}}')
 	            ->escapeColumns([])
                 ->make(true);
         }
-      
         return view('admin.currencies.index');
-   
 	}
 
 	public function create()
@@ -206,9 +200,13 @@ class CurrencyController extends Controller
 	public function status_update(Request $request)
 	{
 		$currency = Currency::find($request->id)->update(['status' => $request->status]);
-        return response()->json(['success'=>'Status changed successfully.']);
+
+		if($request->status == 1)
+        {
+            return response()->json(['message' => 'Status activated successfully.']);
+        }
+        else{
+            return response()->json(['message' => 'Status deactivated successfully.']);
+        }  
 	}
-
-
-
 }
