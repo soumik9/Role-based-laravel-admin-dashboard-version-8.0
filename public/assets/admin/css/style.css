@@ -79,7 +79,8 @@ a:active,
 a:focus {
 	outline: none;
 	text-decoration: none;
-	color: #c4ab54;
+	/* color: #c4ab54; */
+	color: #B53471;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -106,7 +107,8 @@ input:-webkit-autofill:focus {
 	height: calc(1.5em + 1rem + 2px);
 }
 a {
-	color: #0dd9f9;
+	/* color: #0dd9f9; */
+	color: #B53471;
 }
 input,
 button,
