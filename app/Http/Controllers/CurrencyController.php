@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Currency;
 use DataTables;
+use Brian2694\Toastr\Facades\Toastr;
 
 class CurrencyController extends Controller
 {
@@ -110,35 +111,33 @@ class CurrencyController extends Controller
 	{
 		$rules = [
             'name' 					=> 'required|string',
-			'code' 					=> 'required|string|unique:currencies,code',
-            'symbol' 				=> 'required|string',
+            'code' 		            => 'required|string|unique:currencies,code',
+			'symbol' 	            => 'required|string|unique:currencies,symbol',
             'status'                => 'required',
         ];
 
         $messages = [
-            'name.required'    		=> __('currency.form.validation.name.required'),
-            'code.required'    		=> __('currency.form.validation.code.required'),
-            'code.unique'    		=> __('currency.form.validation.code.unique'),
-            'symbol.required'       => __('currency.form.validation.symbol.required'),
+            'name.required'    		=> __('default.form.validation.name.required'),
+            'code.required'    	    => __('default.form.validation.code.required'),
+            'code.unique'    		=> __('default.form.validation.code.unique'),
+            'symbol.required'    	=> __('default.form.validation.symbol.required'),
+            'symbol.unique'    		=> __('default.form.validation.symbol.unique'),
+            'status.required'    	=> __('default.form.validation.status.required'),
         ];
 
         $this->validate($request, $rules, $messages);
-
 		$input = request()->all();
-
 
 		try {
 			$currency 		= Currency::create($input);
-			$success_msg 	= __('currency.message.store.success');
-			return redirect()->route('currencies.index')->with('success',$success_msg);
 
+			Toastr::success(__('currency.message.store.success'));
+		    return redirect()->route('currencies.index');
 		} catch (Exception $e) {
-			$error_msg 		= __('currency.message.store.error');
-			return redirect()->route('currencies.index')->with('error',$error_msg);
+			Toastr::error(__('currency.message.store.error'));
+		    return redirect()->route('currencies.index');
 		}
-
 	}
-
 
 	public function edit($id)
 	{
@@ -148,52 +147,50 @@ class CurrencyController extends Controller
 
 	public function update(Request $request, $id)
 	{
-
 		$rules = [
             'name' 					=> 'required|string',
-            'symbol'                => 'required|string',
+            'code' 		            => 'required|string|unique:currencies,code,' . $id,
+            'symbol' 	            => 'required|string|unique:currencies,symbol,' . $id,
             'status'                => 'required',
         ];
 
-        
         $messages = [
-            'name.required'         => __('currency.form.validation.name.required'),
-            'symbol.required'       => __('currency.form.validation.symbol.required'),
+            'name.required'    		=> __('default.form.validation.name.required'),
+            'code.required'    	    => __('default.form.validation.code.required'),
+            'code.unique'    		=> __('default.form.validation.code.unique'),
+            'symbol.required'    	=> __('default.form.validation.symbol.required'),
+            'symbol.unique'    		=> __('default.form.validation.symbol.unique'),
+            'status.required'    	=> __('default.form.validation.status.required'),
         ];
 
         $this->validate($request, $rules, $messages);
-
 		$input = $request->all();
-
 		$currency = Currency::find($id);
 
 		try {
-			$currency = Currency::find($id);
 			$currency->update($input);
-			$success_msg = __('currency.message.update.success');
-			return redirect()->route('currencies.index')->with('success',$success_msg);
 
+		    Toastr::success(__('currency.message.update.success'));
+		    return redirect()->route('currencies.index');
 		} catch (Exception $e) {
-			$error_msg = __('currency.message.update.error');
-			return redirect()->route('currencies.index')->with('error',$error_msg);
+			Toastr::error(__('currency.message.update.error'));
+		    return redirect()->route('currencies.index');
 		}
 
 	}
 
 	public function destroy()
 	{
-
 		$id = request()->input('id');
 
 		try {
 			Currency::find($id)->delete();
 			$success_msg = __('currency.message.destroy.success');
-			return redirect()->route('currencies.index')->with('success',$success_msg);
+			return redirect()->route('currencies.index')->with(Toastr::error(__('currency.message.destroy.success')));
 		} catch (Exception $e) {
-			$error_msg = __('currency.message.destroy.error');
+			$error_msg = Toastr::error(__('currency.message.destroy.error'));
 			return redirect()->route('currencies.index')->with('error',$error_msg);
 		}
-	
 	}
 
 

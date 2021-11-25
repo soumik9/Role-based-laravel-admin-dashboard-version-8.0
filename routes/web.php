@@ -43,18 +43,6 @@ Route::group(['middleware' => 'language'], function () {
 			Route::get('/profile', 				[App\Http\Controllers\UserController::class, 'profile'])->name('profile');
 			Route::post('/profile/update', 		[App\Http\Controllers\UserController::class, 'profile_update'])->name('profile.update');
 
-
-
-
-
-
-
-
-
-
-
-
-
 			// User
 			Route::prefix('users')->group(function () {
 				Route::get('/index', 			[App\Http\Controllers\UserController::class, 'index'])->name('users.index');
@@ -76,7 +64,6 @@ Route::group(['middleware' => 'language'], function () {
 				Route::post('/destroy', 		[App\Http\Controllers\TestimonialController::class, 'destroy'])->name('testimonials.destroy');
 				Route::get('/status_update', 	[App\Http\Controllers\TestimonialController::class, 'status_update'])->name('testimonials.status_update');
 			});
-			
 
 			// Role
 			Route::prefix('roles')->group(function () {
@@ -98,17 +85,12 @@ Route::group(['middleware' => 'language'], function () {
 				Route::post('/destroy', 		[App\Http\Controllers\PermissionController::class, 'destroy'])->name('permissions.destroy');
 			});
 
-
-
-
 			// Setting
 			Route::prefix('setting')->group(function () {
 				Route::get('/file-manager/index', 	[App\Http\Controllers\FileManagerController::class, 'index'])->name('filemanager.index');
 				Route::get('/site-setting/edit', 	[App\Http\Controllers\SettingController::class, 'edit'])->name('settings.site-setting.edit');
 				Route::post('/site-setting/update/{id}', 	[App\Http\Controllers\SettingController::class, 'update'])->name('settings.site-setting.update');
 			});
-
-
 
 			// Currency
 			Route::prefix('currencies')->group(function () {
@@ -120,9 +102,6 @@ Route::group(['middleware' => 'language'], function () {
 				Route::post('/destroy', 		[App\Http\Controllers\CurrencyController::class, 'destroy'])->name('currencies.destroy');
 				Route::get('/status_update', 	[App\Http\Controllers\CurrencyController::class, 'status_update'])->name('currencies.status_update');
 			});
-
-
-
 
 			// CMS category
 			Route::prefix('cmscategory')->group(function () {
