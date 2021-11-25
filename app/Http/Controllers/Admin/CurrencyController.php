@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,7 +12,7 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class CurrencyController extends Controller
 {
-	function __construct()
+    function __construct()
 	{
 		$this->middleware('auth');
 		$this->middleware('permission:currency-list', ['only' => ['index','store']]);
@@ -20,30 +20,29 @@ class CurrencyController extends Controller
 		$this->middleware('permission:currency-edit', ['only' => ['edit','update']]);
 		$this->middleware('permission:currency-delete', ['only' => ['destroy']]);
 
-        $permissions_currency_list = Permission::get()->filter(function($item) {
+        $currency_list = Permission::get()->filter(function($item) {
             return $item->name == 'currency-list';
         })->first();
-        $permissions_currency_create = Permission::get()->filter(function($item) {
+        $currency_create = Permission::get()->filter(function($item) {
             return $item->name == 'currency-create';
         })->first();
-        $permissions_currency_edit = Permission::get()->filter(function($item) {
+        $currency_edit = Permission::get()->filter(function($item) {
             return $item->name == 'currency-edit';
         })->first();
-        $permissions_currency_delete = Permission::get()->filter(function($item) {
+        $currency_delete = Permission::get()->filter(function($item) {
             return $item->name == 'currency-delete';
         })->first();
 
-
-        if ($permissions_currency_list == null) {
+        if ($currency_list == null) {
             Permission::create(['name'=>'currency-list']);
         }
-        if ($permissions_currency_create == null) {
+        if ($currency_create == null) {
             Permission::create(['name'=>'currency-create']);
         }
-        if ($permissions_currency_edit == null) {
+        if ($currency_edit == null) {
             Permission::create(['name'=>'currency-edit']);
         }
-        if ($permissions_currency_delete == null) {
+        if ($currency_delete == null) {
             Permission::create(['name'=>'currency-delete']);
         }
 	}
@@ -84,10 +83,9 @@ class CurrencyController extends Controller
                 		$current_status = '';
                 	}
                     $status = "
-                            <input type='checkbox' id='status_$row->id' id='currency-$row->id' class='check' onclick='changecurrenciestatus(event.target, $row->id);' " .$current_status. ">
+                            <input type='checkbox' id='status_$row->id' id='currency-$row->id' class='check' onclick='changeCurrencieStatus(event.target, $row->id);' " .$current_status. ">
 							<label for='status_$row->id' class='checktoggle'>checkbox</label>
                     ";
-
                     return $status;
                 })
 
@@ -174,7 +172,6 @@ class CurrencyController extends Controller
 			Toastr::error(__('currency.message.update.error'));
 		    return redirect()->route('currencies.index');
 		}
-
 	}
 
 	public function destroy()

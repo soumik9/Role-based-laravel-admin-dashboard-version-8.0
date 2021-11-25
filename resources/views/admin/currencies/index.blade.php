@@ -120,7 +120,7 @@
 </script>
 
 <script type="text/javascript">
-	function changecurrenciestatus(_this, id) {
+	function changeCurrencieStatus(_this, id) {
 		var status = $(_this).prop('checked') == true ? 1 : 0;
 		let _token = $('meta[name="csrf-token"]').attr('content');
 

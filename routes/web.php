@@ -94,13 +94,13 @@ Route::group(['middleware' => 'language'], function () {
 
 			// Currency
 			Route::prefix('currencies')->group(function () {
-				Route::get('/index', 			[App\Http\Controllers\CurrencyController::class, 'index'])->name('currencies.index');
-				Route::get('/create', 			[App\Http\Controllers\CurrencyController::class, 'create'])->name('currencies.create');
-				Route::post('/store', 			[App\Http\Controllers\CurrencyController::class, 'store'])->name('currencies.store');
-				Route::get('/edit/{id}', 		[App\Http\Controllers\CurrencyController::class, 'edit'])->name('currencies.edit');
-				Route::post('/update/{id}', 	[App\Http\Controllers\CurrencyController::class, 'update'])->name('currencies.update');
-				Route::post('/destroy', 		[App\Http\Controllers\CurrencyController::class, 'destroy'])->name('currencies.destroy');
-				Route::get('/status_update', 	[App\Http\Controllers\CurrencyController::class, 'status_update'])->name('currencies.status_update');
+				Route::get('/index', 			[App\Http\Controllers\Admin\CurrencyController::class, 'index'])->name('currencies.index');
+				Route::get('/create', 			[App\Http\Controllers\Admin\CurrencyController::class, 'create'])->name('currencies.create');
+				Route::post('/store', 			[App\Http\Controllers\Admin\CurrencyController::class, 'store'])->name('currencies.store');
+				Route::get('/edit/{id}', 		[App\Http\Controllers\Admin\CurrencyController::class, 'edit'])->name('currencies.edit');
+				Route::post('/update/{id}', 	[App\Http\Controllers\Admin\CurrencyController::class, 'update'])->name('currencies.update');
+				Route::post('/destroy', 		[App\Http\Controllers\Admin\CurrencyController::class, 'destroy'])->name('currencies.destroy');
+				Route::get('/status_update', 	[App\Http\Controllers\Admin\CurrencyController::class, 'status_update'])->name('currencies.status_update');
 			});
 
 			// CMS category
