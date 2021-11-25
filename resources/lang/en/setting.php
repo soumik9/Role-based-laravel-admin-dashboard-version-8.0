@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+ 
     'index' => [
         'title' => 'Website Setting',
     ],
@@ -11,7 +11,7 @@ return [
     ],
 
     'edit' => [
-        'title' => 'Setting Edit',
+        'title' => 'Website Setting Edit',
     ],
 
     'delete' => [

@@ -18,27 +18,17 @@ class SettingController extends Controller
 	function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('permission:setting-edit', ['only' => ['edit','update']]);
+		$this->middleware('permission:websetting-edit', ['only' => ['edit','update']]);
 
-        $permissions_setting_edit = Permission::get()->filter(function($item) {
-            return $item->name == 'setting-edit';
+        $setting_edit = Permission::get()->filter(function($item) {
+            return $item->name == 'websetting-edit';
         })->first();
 
 
-        if ($permissions_setting_edit == null) {
-            Permission::create(['name'=>'setting-edit']);
-        }
-
-
-
-        $setting = Setting::find(1);
-
-        if ($setting == null) {
-            Setting::create();
+        if ($setting_edit == null) {
+            Permission::create(['name'=>'websetting-edit']);
         }
 	}
-
-
 
 
 	public function edit()
@@ -50,7 +40,6 @@ class SettingController extends Controller
 
 	public function update(Request $request, $id=1)
 	{
-
 		$rules = [
             'website_title' 			=> 'nullable|string',
             'website_logo_dark'         => 'nullable|string',
@@ -72,12 +61,7 @@ class SettingController extends Controller
         ];
 
         $this->validate($request, $rules, $messages);
-
 		$input = $request->all();
-
-
-
-
 
 		$setting = Setting::find($id);
         if (empty($input['website_logo'])) {
@@ -99,9 +83,5 @@ class SettingController extends Controller
 			$error_msg = __('setting.message.update.error');
 			return redirect()->route('settings.site-setting.edit')->with('error',$error_msg);
 		}
-
 	}
-
-
-
 }

@@ -24,6 +24,7 @@ return [
     'settings'              => 'Settings',
    
     'cms'                   => 'CMS',
+    'cms-pages'             => 'CMS Pages',
 
     'category'              => 'Category',
     'categories'            => 'Categories',

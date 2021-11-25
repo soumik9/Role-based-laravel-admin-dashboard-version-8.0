@@ -45,13 +45,13 @@ Route::group(['middleware' => 'language'], function () {
 
 			// User
 			Route::prefix('users')->group(function () {
-				Route::get('/index', 			[App\Http\Controllers\UserController::class, 'index'])->name('users.index');
-				Route::get('/create', 			[App\Http\Controllers\UserController::class, 'create'])->name('users.create');
-				Route::post('/store', 			[App\Http\Controllers\UserController::class, 'store'])->name('users.store');
-				Route::get('/edit/{id}', 		[App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
-				Route::post('/update/{id}', 	[App\Http\Controllers\UserController::class, 'update'])->name('users.update');
-				Route::post('/destroy', 		[App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
-				Route::get('/status_update', 	[App\Http\Controllers\UserController::class, 'status_update'])->name('users.status_update');
+				Route::get('/index', 			[App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
+				Route::get('/create', 			[App\Http\Controllers\Admin\UserController::class, 'create'])->name('users.create');
+				Route::post('/store', 			[App\Http\Controllers\Admin\UserController::class, 'store'])->name('users.store');
+				Route::get('/edit/{id}', 		[App\Http\Controllers\Admin\UserController::class, 'edit'])->name('users.edit');
+				Route::post('/update/{id}', 	[App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');
+				Route::post('/destroy', 		[App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('users.destroy');
+				Route::get('/status_update', 	[App\Http\Controllers\Admin\UserController::class, 'status_update'])->name('users.status_update');
 			});
 
 			// home > testimonials
@@ -87,9 +87,9 @@ Route::group(['middleware' => 'language'], function () {
 
 			// Setting
 			Route::prefix('setting')->group(function () {
-				Route::get('/file-manager/index', 	[App\Http\Controllers\FileManagerController::class, 'index'])->name('filemanager.index');
-				Route::get('/site-setting/edit', 	[App\Http\Controllers\SettingController::class, 'edit'])->name('settings.site-setting.edit');
-				Route::post('/site-setting/update/{id}', 	[App\Http\Controllers\SettingController::class, 'update'])->name('settings.site-setting.update');
+				Route::get('/file-manager/index', 			[App\Http\Controllers\FileManagerController::class, 'index'])->name('filemanager.index');
+				Route::get('/website-setting/edit', 			[App\Http\Controllers\SettingController::class, 'edit'])->name('website-setting.edit');
+				Route::post('/website-setting/update/{id}', 	[App\Http\Controllers\SettingController::class, 'update'])->name('website-setting.update');
 			});
 
 			// Currency
@@ -124,8 +124,6 @@ Route::group(['middleware' => 'language'], function () {
 				Route::post('/destroy', 		[App\Http\Controllers\CmsPageController::class, 'destroy'])->name('cmspages.destroy');
 				Route::get('/status_update', 	[App\Http\Controllers\CmsPageController::class, 'status_update'])->name('cmspages.status_update');
 			});
-
-
 
 		});
 	});
