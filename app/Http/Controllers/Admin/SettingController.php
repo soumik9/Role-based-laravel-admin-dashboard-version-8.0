@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Setting;
 use App\Models\Currency;
 use DataTables;
+use Brian2694\Toastr\Facades\Toastr;
 
 class SettingController extends Controller
 {
-
-	function __construct()
+    function __construct()
 	{
 		$this->middleware('auth');
 		$this->middleware('permission:websetting-edit', ['only' => ['edit','update']]);
@@ -29,7 +29,6 @@ class SettingController extends Controller
             Permission::create(['name'=>'websetting-edit']);
         }
 	}
-
 
 	public function edit()
 	{
@@ -55,7 +54,6 @@ class SettingController extends Controller
             'email'                     => 'nullable|string',
         ];
 
-        
         $messages = [
             
         ];
@@ -74,14 +72,13 @@ class SettingController extends Controller
             $input['website_favicon'] = $setting->website_favicon;
         }
 
-		try {
+        try {
 			$setting->update($input);
-			$success_msg = __('setting.message.update.success');
-			return redirect()->route('settings.site-setting.edit')->with('success',$success_msg);
-
+            Toastr::success(__('setting.message.update.success'));
+		    return redirect()->route('website-setting.edit');
 		} catch (Exception $e) {
-			$error_msg = __('setting.message.update.error');
-			return redirect()->route('settings.site-setting.edit')->with('error',$error_msg);
+            Toastr::success(__('setting.message.update.error'));
+		    return redirect()->route('website-setting.edit');
 		}
 	}
 }

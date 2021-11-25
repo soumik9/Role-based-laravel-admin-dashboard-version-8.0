@@ -88,8 +88,8 @@ Route::group(['middleware' => 'language'], function () {
 			// Setting
 			Route::prefix('setting')->group(function () {
 				Route::get('/file-manager/index', 			[App\Http\Controllers\FileManagerController::class, 'index'])->name('filemanager.index');
-				Route::get('/website-setting/edit', 			[App\Http\Controllers\SettingController::class, 'edit'])->name('website-setting.edit');
-				Route::post('/website-setting/update/{id}', 	[App\Http\Controllers\SettingController::class, 'update'])->name('website-setting.update');
+				Route::get('/website-setting/edit', 			[App\Http\Controllers\Admin\SettingController::class, 'edit'])->name('website-setting.edit');
+				Route::post('/website-setting/update/{id}', 	[App\Http\Controllers\Admin\SettingController::class, 'update'])->name('website-setting.update');
 			});
 
 			// Currency
