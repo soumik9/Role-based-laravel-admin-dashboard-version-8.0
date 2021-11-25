@@ -19,6 +19,13 @@ Route::get('setlocale/{locale}', function ($lang) {
 	return redirect()->back();
 })->name('setlocale');
 
+
+// Frontend Routes
+Route::get('/', 					[App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
+
+
+
+
 Route::group(['middleware' => 'language'], function () {
 
 	// Admin Routes
@@ -37,7 +44,7 @@ Route::group(['middleware' => 'language'], function () {
 		// Admin Authenticated Routes
 		Route::group(['middleware' => ['auth']], function () {
 
-			Route::get('/dashboard', 			[App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
+			Route::get('/dashboard', 			[App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
 
 			// Profile
 			Route::get('/profile', 				[App\Http\Controllers\UserController::class, 'profile'])->name('profile');
@@ -52,17 +59,6 @@ Route::group(['middleware' => 'language'], function () {
 				Route::post('/update/{id}', 	[App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');
 				Route::post('/destroy', 		[App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('users.destroy');
 				Route::get('/status_update', 	[App\Http\Controllers\Admin\UserController::class, 'status_update'])->name('users.status_update');
-			});
-
-			// home > testimonials
-			Route::prefix('testimonials')->group(function () {
-				Route::get('/index', 			[App\Http\Controllers\TestimonialController::class, 'index'])->name('testimonials.index');
-				Route::get('/create', 			[App\Http\Controllers\TestimonialController::class, 'create'])->name('testimonials.create');
-				Route::post('/store', 			[App\Http\Controllers\TestimonialController::class, 'store'])->name('testimonials.store');
-				Route::get('/edit/{id}', 		[App\Http\Controllers\TestimonialController::class, 'edit'])->name('testimonials.edit');
-				Route::post('/update/{id}', 	[App\Http\Controllers\TestimonialController::class, 'update'])->name('testimonials.update');
-				Route::post('/destroy', 		[App\Http\Controllers\TestimonialController::class, 'destroy'])->name('testimonials.destroy');
-				Route::get('/status_update', 	[App\Http\Controllers\TestimonialController::class, 'status_update'])->name('testimonials.status_update');
 			});
 
 			// Role
@@ -85,13 +81,6 @@ Route::group(['middleware' => 'language'], function () {
 				Route::post('/destroy', 		[App\Http\Controllers\PermissionController::class, 'destroy'])->name('permissions.destroy');
 			});
 
-			// Setting
-			Route::prefix('setting')->group(function () {
-				Route::get('/file-manager/index', 			[App\Http\Controllers\FileManagerController::class, 'index'])->name('filemanager.index');
-				Route::get('/website-setting/edit', 			[App\Http\Controllers\Admin\SettingController::class, 'edit'])->name('website-setting.edit');
-				Route::post('/website-setting/update/{id}', 	[App\Http\Controllers\Admin\SettingController::class, 'update'])->name('website-setting.update');
-			});
-
 			// Currency
 			Route::prefix('currencies')->group(function () {
 				Route::get('/index', 			[App\Http\Controllers\Admin\CurrencyController::class, 'index'])->name('currencies.index');
@@ -101,6 +90,13 @@ Route::group(['middleware' => 'language'], function () {
 				Route::post('/update/{id}', 	[App\Http\Controllers\Admin\CurrencyController::class, 'update'])->name('currencies.update');
 				Route::post('/destroy', 		[App\Http\Controllers\Admin\CurrencyController::class, 'destroy'])->name('currencies.destroy');
 				Route::get('/status_update', 	[App\Http\Controllers\Admin\CurrencyController::class, 'status_update'])->name('currencies.status_update');
+			});
+
+			// Setting
+			Route::prefix('setting')->group(function () {
+				Route::get('/file-manager/index', 			 [App\Http\Controllers\Admin\FileManagerController::class, 'index'])->name('filemanager.index');
+				Route::get('/website-setting/edit', 		 [App\Http\Controllers\Admin\SettingController::class, 'edit'])->name('website-setting.edit');
+				Route::post('/website-setting/update/{id}',  [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('website-setting.update');
 			});
 
 			// CMS category
@@ -125,13 +121,18 @@ Route::group(['middleware' => 'language'], function () {
 				Route::get('/status_update', 	[App\Http\Controllers\CmsPageController::class, 'status_update'])->name('cmspages.status_update');
 			});
 
+			// Testimonials
+			Route::prefix('testimonials')->group(function () {
+				Route::get('/index', 			[App\Http\Controllers\TestimonialController::class, 'index'])->name('testimonials.index');
+				Route::get('/create', 			[App\Http\Controllers\TestimonialController::class, 'create'])->name('testimonials.create');
+				Route::post('/store', 			[App\Http\Controllers\TestimonialController::class, 'store'])->name('testimonials.store');
+				Route::get('/edit/{id}', 		[App\Http\Controllers\TestimonialController::class, 'edit'])->name('testimonials.edit');
+				Route::post('/update/{id}', 	[App\Http\Controllers\TestimonialController::class, 'update'])->name('testimonials.update');
+				Route::post('/destroy', 		[App\Http\Controllers\TestimonialController::class, 'destroy'])->name('testimonials.destroy');
+				Route::get('/status_update', 	[App\Http\Controllers\TestimonialController::class, 'status_update'])->name('testimonials.status_update');
+			});
+
 		});
 	});
-
-
-
-
-	// Frontend Routes
-	Route::get('/', 					[App\Http\Controllers\Frontend\IndexCpntroller::class, 'index'])->name('home');
 
 });
