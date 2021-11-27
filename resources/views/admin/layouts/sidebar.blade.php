@@ -36,7 +36,7 @@
                             </li>
                         @endcan
 
-                        @can('cms-list')
+                        @can('cmspage-list')
                             <li>
                                 <a href="{{ route('cmspages.index') }}" title="{{__('sidebar.cms-pages')}}" class="sidebar-link {{ (request()->is('admin/cmspage*')) ? 'active' : '' }}">
                                     <span class="hide-menu">{{__('sidebar.cms-pages')}}</span>

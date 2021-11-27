@@ -14,4 +14,9 @@ class CmsCategory extends Model
         'slug',
         'status',
     ];
+
+    public function cms()
+    {
+        return $this->hasMany(Cms::class);
+    }
 }

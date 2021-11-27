@@ -19,11 +19,12 @@ class CreateCmsPagesTable extends Migration
                 $table->string('title')->nullable();
                 $table->string('slug')->unique();
                 $table->text('description')->nullable();
+                $table->foreignId('cms_category_id')->nullable()->constrained()->onDelete('set null');
                 $table->boolean('status')->default(0);
+                $table->string('meta_title')->nullable();
+                $table->text('meta_description')->nullable();
+                $table->text('meta_keywords')->nullable();
                 $table->timestamps();
-
-                $table->biginteger('cat_id')->unsigned()->nullable();
-                $table->foreign('cat_id')->references('id')->on('cms_categories')->onDelete('set null');
             });
         }
     }

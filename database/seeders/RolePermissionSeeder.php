@@ -43,10 +43,10 @@ class RolePermissionSeeder extends Seeder
             'cmscategory-edit',
             'cmscategory-delete',
 
-            'cms-list',
-            'cms-create',
-            'cms-edit',
-            'cms-delete',
+            'cmspage-list',
+            'cmspage-create',
+            'cmspage-edit',
+            'cmspage-delete',
 
             'currency-list',
             'currency-create',
@@ -57,9 +57,7 @@ class RolePermissionSeeder extends Seeder
             'websetting-edit',
             'user-activity',
             'log-view',
-
         ];
-
 
         //create and assign permission 
         for($i=0; $i<count($permissions); $i++)

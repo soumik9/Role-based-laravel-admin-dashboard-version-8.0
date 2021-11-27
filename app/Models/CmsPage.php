@@ -19,9 +19,17 @@ class CmsPage extends Model
     protected $fillable = [
         'title',
         'slug',
-        'cat_id',
+        'cms_category_id',
         'description',
         'status',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
     ];
+
+    public function cmscategory()
+    {
+        return $this->belongsTo(CmsCategory::class,'cms_category_id');
+    }
 
 }

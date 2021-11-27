@@ -112,13 +112,13 @@ Route::group(['middleware' => 'language'], function () {
 
 			// CMS Pages
 			Route::prefix('cmspages')->group(function () {
-				Route::get('/index', 			[App\Http\Controllers\Admin\CMSPagesController::class, 'index'])->name('cmspages.index');
-				Route::get('/create', 			[App\Http\Controllers\Admin\CMSPagesController::class, 'create'])->name('cmspages.create');
-				Route::post('/store', 			[App\Http\Controllers\Admin\CMSPagesController::class, 'store'])->name('cmspages.store');
-				Route::get('/edit/{id}', 		[App\Http\Controllers\Admin\CMSPagesController::class, 'edit'])->name('cmspages.edit');
-				Route::post('/update/{id}', 	[App\Http\Controllers\Admin\CMSPagesController::class, 'update'])->name('cmspages.update');
-				Route::post('/destroy', 		[App\Http\Controllers\Admin\CMSPagesController::class, 'destroy'])->name('cmspages.destroy');
-				Route::get('/status_update', 	[App\Http\Controllers\Admin\CMSPagesController::class, 'status_update'])->name('cmspages.status_update');
+				Route::get('/index', 			[App\Http\Controllers\Admin\CMSPageController::class, 'index'])->name('cmspages.index');
+				Route::get('/create', 			[App\Http\Controllers\Admin\CMSPageController::class, 'create'])->name('cmspages.create');
+				Route::post('/store', 			[App\Http\Controllers\Admin\CMSPageController::class, 'store'])->name('cmspages.store');
+				Route::get('/edit/{id}', 		[App\Http\Controllers\Admin\CMSPageController::class, 'edit'])->name('cmspages.edit');
+				Route::post('/update/{id}', 	[App\Http\Controllers\Admin\CMSPageController::class, 'update'])->name('cmspages.update');
+				Route::post('/destroy', 		[App\Http\Controllers\Admin\CMSPageController::class, 'destroy'])->name('cmspages.destroy');
+				Route::get('/status_update', 	[App\Http\Controllers\Admin\CMSPageController::class, 'status_update'])->name('cmspages.status_update');
 			});
 
 			// Testimonials

@@ -16,7 +16,7 @@
 @section('content')
 	<form method="POST" action="{{ route('cmscategories.store') }}">
 		@csrf()
-v9oov2k9
+
 		<div class="page-header">
             <div class="card breadcrumb-card">
                 <div class="row justify-content-between align-content-between" style="height: 100%;">
@@ -40,7 +40,6 @@ v9oov2k9
                 </div>
             </div><!-- /card finish -->	
         </div><!-- /Page Header -->
-
 
 		<section class="crud-body">
 			<div class="row">

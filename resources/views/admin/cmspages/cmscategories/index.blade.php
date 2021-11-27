@@ -30,7 +30,7 @@
 				</div>
 				<div class="col-md-3">
 					<div class="create-btn pull-right">
-						<a href="{{ route('cmscategories.create') }}" class="btn custom-create-btn">{{ __('default.form.add-button') }}</a>
+						<a href="{{ route('cmscategories.create') }}" class="btn custom-create-btn">{{ __('cmscategory.form.add-button') }}</a>
 					</div>
 				</div>
 			</div>
