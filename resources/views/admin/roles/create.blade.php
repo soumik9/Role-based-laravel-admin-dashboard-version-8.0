@@ -5,86 +5,109 @@
 @endsection
 
 @section('content')
+	<form action="{{ route('roles.store') }}" method="POST" enctype="multipart/form-data">
+		@csrf()
 
-
-    <div class="content container-fluid">
-
-    	{!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
-
-	    	<div class="page-header">
-	    		<div class="row">
-			    	<div class="col-6">
-			    		<h3 class="page-title">
-			    			<a href="{{ route('roles.index') }}">
-			    				<i class="fe fe-arrow-left"></i>
-			    			</a>
-					        {{__('role.create.title')}}
-					        {{ Breadcrumbs::render('roles.create') }}
-					    </h3>
-			    	</div>
-			    	<div class="col-6">
-			    		<button type="submit" class="save-button btn btn-outline-success btn-rounded float-right">
-			    			<i class="fe fe-document"></i> 
-			    			{{__('role.form.save-button')}}
-			    		</button>
-			    	</div>
-			    </div>
-	    	</div>
-	    	<div class="card-body">
-
-		    	
-				
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12">
-						<div class="form-group">
-							<label for="name">{{__('role.form.name')}}:</label>
-
-							<input type="text" name="name" id="name" class="form-control @error('name') form-control-error @enderror" required="required" value="{{old('name')}}">
-
-							@error('name')
-								<span class="text-danger">{{ $message }}</span>
-							@enderror
-
-						</div>
-						<div class="form-group">
-							<label for="code">{{__('role.form.code')}}:</label>
-
-							<input type="text" name="code" id="code" class="form-control @error('code') form-control-error @enderror" required="required" value="{{old('code')}}">
-
-							@error('code')
-								<span class="text-danger">{{ $message }}</span>
-							@enderror
-
-						</div>
-
+		<div class="page-header">
+			<div class="card breadcrumb-card">
+				<div class="row justify-content-between align-content-between" style="height: 100%;">
+					<div class="col-md-6">
+						<h3 class="page-title">{{__('role.index.title')}}</h3>
+						<ul class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="{{ route('dashboard') }}">Dashboard</a>
+							</li>
+							<li class="breadcrumb-item">
+								<a href="{{ route('roles.index') }}">{{ __('role.index.title') }}</a>
+							</li>
+							<li class="breadcrumb-item active-breadcrumb">
+								<a href="{{ route('roles.create') }}">{{ __('role.create.title') }}</a>
+							</li>
+						</ul>
 					</div>
-
-					<div class="col-xs-12 col-sm-12 col-md-12">
-						<div class="form-group">
-							<label for="name">{{__('role.form.permission')}}:</label>
-							@error('permission')
-								<br>
-								<span class="text-danger">{{ $message }}</span>
-							@enderror
-							<br><br>
-							@foreach($permission as $value)
-								<label style="margin-left: 20px;">{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
-								{{ $value->name }}</label>
-							<br>
-							@endforeach
+					<div class="col-md-3">
+						<div class="create-btn pull-right">
+							<button type="submit" class="btn custom-create-btn">{{ __('default.form.save-button') }}</button>
 						</div>
 					</div>
-
-					{{-- <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</div> --}}
 				</div>
+			</div><!-- /card finish -->	
+		</div><!-- /Page Header -->
 
-				
-			</div>
-		{!! Form::close() !!}
-		
-    </div>
-	
+		<div class="row">
+            <div class="col-md-12">
+                <div class="card">
 
+                    <div class="card-header">
+                        <h4 class="card-title">Roles Information</h4>
+                    </div>
+
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-12">
+
+								<div class="form-group">
+									<label for="name" class="required">{{ __('default.form.name') }}</label>
+									<input type="text" class="form-control" name="name" id="name" class="form-control @error('name') form-control-error @enderror" placeholder="Enter role name" value="{{ old('name') }}" required>
+
+									@error('name')
+										<span class="text-danger">{{ $message }}</span>
+									@enderror
+								</div>
+
+								<div class="form-group">
+									<label for="code" class="required">{{ __('default.form.code') }}</label>
+									<input type="text" class="form-control" name="code" id="code" class="form-control @error('code') form-control-error @enderror" placeholder="Enter code" value="{{ old('code') }}" required>
+
+									@error('code')
+										<span class="text-danger">{{ $message }}</span>
+									@enderror
+								</div>
+
+								<div class="form-group">
+									<label for="permission"><h5>Permissions</h5></label>
+									
+									@error('permission')
+										<span class="text-danger">{{ $message }}</span>
+									@enderror
+									
+									<div class="checkbox">
+										<input type="checkbox" id="checkPermissionAll" value="1"> All
+									</div>
+									<hr>
+
+									<div class="col-md-10">
+										@foreach ($permissions as $permission)
+											<div class="checkbox">
+												<label>
+													<input type="checkbox" class="@error('permission') form-control-error @enderror" name="permission[]" value="{{ $permission->id }}"> {{ $permission->name }}
+												</label>
+											</div>
+										@endforeach
+									</div>
+								</div>
+
+							</div><!-- end col-md-12 -->
+						</div><!-- end row -->
+					</div> <!-- end card body -->
+
+				</div> <!-- end card -->
+            </div> <!-- end col-md-12 -->
+        </div><!-- end row -->
+
+	</form>
 @endsection
+
+@push('scripts')
+<script>
+	$("#checkPermissionAll").click(function(){
+		if($(this).is(':checked'))
+		{
+			$('input[type=checkbox]').prop('checked', true)
+		}else
+		{
+			$('input[type=checkbox]').prop('checked', false)
+		}
+	})
+</script>
+@endpush

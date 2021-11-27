@@ -63,12 +63,12 @@ Route::group(['middleware' => 'language'], function () {
 
 			// Role
 			Route::prefix('roles')->group(function () {
-				Route::get('/index', 			[App\Http\Controllers\RoleController::class, 'index'])->name('roles.index');
-				Route::get('/create', 			[App\Http\Controllers\RoleController::class, 'create'])->name('roles.create');
-				Route::post('/store', 			[App\Http\Controllers\RoleController::class, 'store'])->name('roles.store');
-				Route::get('/edit/{id}', 		[App\Http\Controllers\RoleController::class, 'edit'])->name('roles.edit');
-				Route::post('/update/{id}', 	[App\Http\Controllers\RoleController::class, 'update'])->name('roles.update');
-				Route::post('/destroy', 		[App\Http\Controllers\RoleController::class, 'destroy'])->name('roles.destroy');
+				Route::get('/index', 			[App\Http\Controllers\Admin\RoleController::class, 'index'])->name('roles.index');
+				Route::get('/create', 			[App\Http\Controllers\Admin\RoleController::class, 'create'])->name('roles.create');
+				Route::post('/store', 			[App\Http\Controllers\Admin\RoleController::class, 'store'])->name('roles.store');
+				Route::get('/edit/{id}', 		[App\Http\Controllers\Admin\RoleController::class, 'edit'])->name('roles.edit');
+				Route::post('/update/{id}', 	[App\Http\Controllers\Admin\RoleController::class, 'update'])->name('roles.update');
+				Route::post('/destroy', 		[App\Http\Controllers\Admin\RoleController::class, 'destroy'])->name('roles.destroy');
 			});
 
 			// Permission

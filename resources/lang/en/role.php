@@ -43,6 +43,8 @@ return [
             'error'     => 'There is an error! Please try later!',
         ],
 
+        'warning_last_role' => 'Last Role can not be deleted!',
+
         'update' => [
             'success'   => 'Role updated successfully!',
             'error'     => 'There is an error! Please try later!',
@@ -51,7 +53,6 @@ return [
         'destroy' => [
             'success'   => 'Role deleted successfully!',
             'error'     => 'There is an error! Please try later!',
-            'warning_last_role' => 'Last Role can not be deleted!',
         ],
     ]
 

@@ -242,7 +242,7 @@ class UserController extends Controller
 		$count_all_user = $all_user->count();
 
 		if ($count_all_user <= 1) {
-			Toastr::error(__('user.message.store.error'));
+			Toastr::error(__('user.message.warning_last_user'));
 		    return redirect()->route('users.index');
 		}else{
 			$getuser = User::find($id);

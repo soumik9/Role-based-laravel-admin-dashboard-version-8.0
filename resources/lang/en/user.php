@@ -48,10 +48,11 @@ return [
             'error'     => 'There is an error! Please try later!',
         ],
 
+        'warning_last_user' => 'Last User can not be deleted!',
+
         'destroy' => [
             'success'   => 'User deleted successfully!',
             'error'     => 'There is an error! Please try later!',
-            'warning_last_user' => 'Last user can not be deleted!',
         ],
     ]
 
