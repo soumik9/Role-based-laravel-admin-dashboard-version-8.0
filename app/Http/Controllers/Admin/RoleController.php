@@ -104,7 +104,7 @@ class RoleController extends Controller
 	{
 		$rules = [
             'name' 					=> 'required|unique:roles,name,' . $id,
-            'code' 					=> 'required|unique:roles,name,' . $id,
+            'code' 					=> 'required|unique:roles,code,' . $id,
 			'permission' 			=> 'required',
         ];
 

@@ -30,7 +30,7 @@
                     <ul style="display: none;">
                         @can('cmscategory-list')
                             <li>
-                                <a href="{{ route('cmscategory.index') }}" title="{{__('sidebar.category')}}" class="sidebar-link {{ (request()->is('admin/cmscategory*')) ? 'active' : '' }}">
+                                <a href="{{ route('cmscategories.index') }}" title="{{__('sidebar.category')}}" class="sidebar-link {{ (request()->is('admin/cmscategories*')) ? 'active' : '' }}">
                                     <span class="hide-menu">{{__('sidebar.category')}}</span>
                                 </a>
                             </li>

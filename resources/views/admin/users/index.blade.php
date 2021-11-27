@@ -39,9 +39,9 @@
 
 
     <div class="row">
-
         <div class="col-md-12">
             <div class="card">
+
                 <div class="card-body">
                     <table class="table table-hover table-center mb-0" id="table">
                         <thead>
@@ -65,9 +65,9 @@
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
-
     </div>
 @endsection
 
