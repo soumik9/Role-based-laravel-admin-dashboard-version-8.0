@@ -47,15 +47,15 @@
                         <thead>
                             <tr>
                                 <th class="">{{ __('default.table.sl') }}</th>
-                                <th class="">{{ __('default.form.image') }}</th>
-                                <th class="">{{ __('default.form.name') }}</th>
-                                <th class="">{{ __('default.form.email') }}</th>
-                                <th class="">{{ __('default.form.mobile') }}</th>
-                                <th class="">{{ __('default.form.role') }}</th>
-                                <th class="">{{ __('default.form.status') }}</th>
+                                <th class="">{{ __('default.table.image') }}</th>
+                                <th class="">{{ __('default.table.name') }}</th>
+                                <th class="">{{ __('default.table.email') }}</th>
+                                <th class="">{{ __('default.table.mobile') }}</th>
+                                <th class="">{{ __('default.table.role') }}</th>
+                                <th class="">{{ __('default.table.status') }}</th>
 
                                 @if (Gate::check('user-edit') || Gate::check('user-delete'))
-                                    <th class="">{{ __('default.form.action') }}</th>
+                                    <th class="">{{ __('default.table.action') }}</th>
                                 @endif
                             </tr>
                         </thead>

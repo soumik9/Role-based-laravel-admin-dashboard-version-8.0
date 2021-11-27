@@ -73,12 +73,12 @@ Route::group(['middleware' => 'language'], function () {
 
 			// Permission
 			Route::prefix('permissions')->group(function () {
-				Route::get('/index', 			[App\Http\Controllers\PermissionController::class, 'index'])->name('permissions.index');
-				Route::get('/create', 			[App\Http\Controllers\PermissionController::class, 'create'])->name('permissions.create');
-				Route::post('/store', 			[App\Http\Controllers\PermissionController::class, 'store'])->name('permissions.store');
-				Route::get('/edit/{id}', 		[App\Http\Controllers\PermissionController::class, 'edit'])->name('permissions.edit');
-				Route::post('/update/{id}', 	[App\Http\Controllers\PermissionController::class, 'update'])->name('permissions.update');
-				Route::post('/destroy', 		[App\Http\Controllers\PermissionController::class, 'destroy'])->name('permissions.destroy');
+				Route::get('/index', 			[App\Http\Controllers\Admin\PermissionController::class, 'index'])->name('permissions.index');
+				Route::get('/create', 			[App\Http\Controllers\Admin\PermissionController::class, 'create'])->name('permissions.create');
+				Route::post('/store', 			[App\Http\Controllers\Admin\PermissionController::class, 'store'])->name('permissions.store');
+				Route::get('/edit/{id}', 		[App\Http\Controllers\Admin\PermissionController::class, 'edit'])->name('permissions.edit');
+				Route::post('/update/{id}', 	[App\Http\Controllers\Admin\PermissionController::class, 'update'])->name('permissions.update');
+				Route::post('/destroy', 		[App\Http\Controllers\Admin\PermissionController::class, 'destroy'])->name('permissions.destroy');
 			});
 
 			// Currency

@@ -1,19 +1,17 @@
 <?php
-namespace App\Http\Controllers;
+
+namespace App\Http\Controllers\Admin;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Brian2694\Toastr\Facades\Toastr;
 
 class PermissionController extends Controller
 {
-	/**
-	* Display a listing of the resource.
-	*
-	* @return \Illuminate\Http\Response
-	*/
-	function __construct()
+    function __construct()
 	{
 		$this->middleware('auth');
 		$this->middleware('permission:permission-list', ['only' => ['index','store']]);
@@ -21,30 +19,30 @@ class PermissionController extends Controller
 		$this->middleware('permission:permission-edit', ['only' => ['edit','update']]);
 		$this->middleware('permission:permission-delete', ['only' => ['destroy']]);
 
-        $permissions_permission_list = Permission::get()->filter(function($item) {
+        $permission_list = Permission::get()->filter(function($item) {
             return $item->name == 'permission-list';
         })->first();
-        $permissions_permission_create = Permission::get()->filter(function($item) {
+        $permission_create = Permission::get()->filter(function($item) {
             return $item->name == 'permission-create';
         })->first();
-        $permissions_permission_edit = Permission::get()->filter(function($item) {
+        $permission_edit = Permission::get()->filter(function($item) {
             return $item->name == 'permission-edit';
         })->first();
-        $permissions_permission_delete = Permission::get()->filter(function($item) {
+        $permission_delete = Permission::get()->filter(function($item) {
             return $item->name == 'permission-delete';
         })->first();
 
 
-        if ($permissions_permission_list == null) {
+        if ($permission_list == null) {
             Permission::create(['name'=>'permission-list']);
         }
-        if ($permissions_permission_create == null) {
+        if ($permission_create == null) {
             Permission::create(['name'=>'permission-create']);
         }
-        if ($permissions_permission_edit == null) {
+        if ($permission_edit == null) {
             Permission::create(['name'=>'permission-edit']);
         }
-        if ($permissions_permission_delete == null) {
+        if ($permission_delete == null) {
             Permission::create(['name'=>'permission-delete']);
         }
 	}
@@ -52,7 +50,6 @@ class PermissionController extends Controller
 	public function index(Request $request)
 	{
 		$permissions = Permission::all();
-
 		return view('admin.permissions.index',compact('permissions'));
 	}
 
@@ -69,8 +66,8 @@ class PermissionController extends Controller
         ];
 
         $messages = [
-            'name.required'    		=> __('role.form.validation.name.required'),
-            'name.unique'    		=> __('role.form.validation.name.unique'),
+            'name.required'    		=> __('default.form.validation.name.required'),
+            'name.unique'    		=> __('default.form.validation.name.unique'),
         ];
         
         $this->validate($request, $rules, $messages);
@@ -78,15 +75,12 @@ class PermissionController extends Controller
 		try {
 			$permissions = Permission::create(['name' => $request->input('name')]);
 
-			$success_msg = __('permission.message.store.success');
-			return redirect()->route('permissions.create')->with('success',$success_msg);
-
+			Toastr::success(__('permission.message.store.success'));
+		    return redirect()->route('permissions.create');
 		} catch (Exception $e) {
-			$error_msg = __('permission.message.store.error');
-			return redirect()->route('permissions.create')->with('error',$error_msg);
+			Toastr::error(__('permission.message.store.error'));
+		    return redirect()->route('permissions.create');
 		}
-
-
 	}
 
 	public function edit($id)
@@ -98,11 +92,12 @@ class PermissionController extends Controller
 	public function update(Request $request, $id)
 	{
 		$rules = [
-			'name' => 'required',
+			'name' => 'required|unique:permissions,name,' . $id,
         ];
 
         $messages = [
-            'name.required'    		=> __('role.form.validation.name.required'),
+            'name.required'    		=> __('default.form.validation.name.required'),
+            'name.unique'    		=> __('default.form.validation.name.unique'),
         ];
         
         $this->validate($request, $rules, $messages);
@@ -112,30 +107,25 @@ class PermissionController extends Controller
 			$permissions->name = $request->input('name');
 			$permissions->save();
 
-			$success_msg = __('permission.message.update.success');
-			return redirect()->route('permissions.index')->with('success',$success_msg);
+            Toastr::success(__('permission.message.update.success'));
+		    return redirect()->route('permissions.index');
 
 		} catch (Exception $e) {
-			$error_msg = __('permission.message.update.error');
-			return redirect()->route('permissions.index')->with('error',$error_msg);
+            Toastr::error(__('permission.message.update.error'));
+		    return redirect()->route('permissions.index');
 		}
-
-
 	}
 
 	public function destroy()
 	{
 		$id = request()->input('id');
-
 		try {
-			$permissions = Permission::find($id);
-			DB::table("permissions")->where('id',$id)->delete();
-			$success_msg = __('permission.message.destroy.success');
-			return redirect()->route('permissions.index')->with('success',$success_msg);
+            Permission::find($id)->delete();
+			return redirect()->route('permissions.index')->with(Toastr::error(__('permission.message.destroy.success')));
 
 		} catch (Exception $e) {
-			$error_msg = __('permission.message.destroy.error');
-			return redirect()->route('permissions.index')->with('error',$error_msg);
+            $error_msg = Toastr::error(__('permission.message.destroy.error'));
+			return redirect()->route('permissions.index')->with($error_msg);
 		}
 	}
 }
