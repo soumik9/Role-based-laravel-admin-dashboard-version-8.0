@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>@yield('page_title')</title>
+    <title>@if($setting->website_title != null || !empty($setting->website_title)) {{ $setting->website_title }} @endif | @yield('page_title')</title>
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="content-language" content="{{ Session::get('locale') }}">

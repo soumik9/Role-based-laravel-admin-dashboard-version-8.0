@@ -48,7 +48,7 @@
         <!-- Frontend -->
         <li class="nav-item">
             <a href="{{route('home')}}" target="_blank" class="dropdown-toggle nav-link" title="Front End">
-                <i class="fe fe-globe"></i>
+                <i data-feather="cast"></i>
             </a>
         </li>
         <!-- /Frontend -->
