@@ -47,8 +47,8 @@ Route::group(['middleware' => 'language'], function () {
 			Route::get('/dashboard', 			[App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
 
 			// Profile
-			Route::get('/profile', 				[App\Http\Controllers\UserController::class, 'profile'])->name('profile');
-			Route::post('/profile/update', 		[App\Http\Controllers\UserController::class, 'profile_update'])->name('profile.update');
+			Route::get('/profile', 				[App\Http\Controllers\Admin\UserController::class, 'profile'])->name('profile');
+			Route::post('/profile/update/{id}', [App\Http\Controllers\Admin\UserController::class, 'profile_update'])->name('profile.update');
 
 			// User
 			Route::prefix('users')->group(function () {

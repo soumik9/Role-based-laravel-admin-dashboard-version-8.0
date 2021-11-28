@@ -267,20 +267,18 @@ class UserController extends Controller
 		return view('admin.users.profile');
 	}
 
-	public function profile_update(Request $request)
+	public function profile_update(Request $request, $id)
 	{
 		$rules = [
             'password' 	=> 'required|string|min:6|same:confirm-password',
         ];
 
         $messages = [
-            'password.required'    	=> __('user.form.validation.password.required'),
-            'password.same'    		=> __('user.form.validation.password.same'),
+            'password.required'    	=> __('default.form.validation.password.required'),
+            'password.same'    		=> __('default.form.validation.password.same'),
         ];
 
         $this->validate($request, $rules, $messages);
-
-		$id = auth()->guard('auth')->user()->id;
 		$input = $request->all();
 		$input['password'] = Hash::make($input['password']);
 
@@ -289,14 +287,12 @@ class UserController extends Controller
 				'password' => $input['password']
 			]);
 
-			$success_msg = __('user.message.profile.success');
-			return redirect()->route('profile')->with('success',$success_msg);
-
+			Toastr::success(__('user.message.profile.success'));
+		    return redirect()->route('profile');
 		} catch (Exception $e) {
-			$error_msg = __('user.message.profile.error');
-			return redirect()->route('profile')->with('error',$error_msg);
-		}
-		
+			Toastr::success(__('user.message.profile.error'));
+		    return redirect()->route('profile');
+		}	
 	}
 
 	public function status_update(Request $request)
