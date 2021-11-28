@@ -24,3 +24,48 @@ To see the progress report of this project, [Project report](https://docs.google
 - Can view, create, update and delete <b>CMS Pages</b>.
 - Can <b>change Logo, Favicon, SEO setting, default CURRENCY, Contact details, Social Media links</b> from setting.
 - Can read <b>errors logs</b>.
+
+
+## To run this code on your enviroment
+
+1. Make a test domain,
+    Go to this location -> <b>C:\Windows\System32\drivers\etc </b> <br>
+    Edit 'host' file and paste -> <b>127.0.0.1       giveaname.test </b> <br>
+    Again, go to this location -> <b>C:\xampp\apache\conf\extra </b> <br>
+    Edit 'httpd-vhosts.conf'file and paste ->  <br>
+    <b>
+    <VirtualHost *:80>
+    ##ServerAdmin webmaster@dummy-host2.example.com
+    DocumentRoot "C:/xampp/htdocs/projectname/public"
+    ServerName giveaname.test
+    ##ErrorLog "logs/dummy-host2.example.com-error.log"
+    ##CustomLog "logs/dummy-host2.example.com-access.log" common
+    </VirtualHost>
+    </b> <br>
+  
+2. Create database and Edit '.env' <br>
+3. Go to 'bootstrap' folder -> then 'cache' folder and delete everything inside folder
+4. If 'storage' folder doesn't exist then make 'storage' folder and inside 'storage' folder make these folder 'app', 'framework', 'log'. Inside 'app' folder make 'public'
+   folder. Inside 'framwork' folder make these folder 'cache', 'sessions', 'testing', 'views'. Inside 'cache' folder make 'data' folder.
+5. If 'storage' folder exist then delete all files inside these folder 'cache', 'sessions', 'testing', 'views'. And make sure inside 'cache' folder there exist 'data' folder.
+6. Then run all of commands, <br>
+
+                        composer install
+                        php artisan key:generate
+                        php artisan storage:link
+                        php artisan migrate
+                        php artisan db:seed
+                        
+                        php artisan cache:clear
+                        php artisan config:clear
+                        php artisan view:clear
+                        php artisan config:cache
+                        php artisan view:cache
+                        php artisan route:cache
+                        composer dump-autoload
+                        php artisan vendor:publish
+                       
+7. For reset password feature config '.env' file with [Mailtrap](https://mailtrap.io/).
+8. Now open your browser and go to your domain and ENJOY.
+    
+    
