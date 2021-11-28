@@ -26,8 +26,7 @@ class UserController extends Controller
 		$this->middleware('permission:user-create', ['only' => ['create','store']]);
 		$this->middleware('permission:user-edit', ['only' => ['edit','update']]);
 		$this->middleware('permission:user-delete', ['only' => ['destroy']]);
-		$this->middleware('permission:profile-index', ['only' => ['index']]);
-		$this->middleware('permission:profile-update', ['only' => ['profile','profile_update']]);
+		$this->middleware('permission:profile-index', ['only' => ['profile','profile_update']]);
 
         $user_list = Permission::get()->filter(function($item) {
             return $item->name == 'user-list';
@@ -43,9 +42,6 @@ class UserController extends Controller
         })->first();
         $profile_index = Permission::get()->filter(function($item) {
             return $item->name == 'profile-index';
-        })->first();
-        $profile_update = Permission::get()->filter(function($item) {
-            return $item->name == 'profile-update';
         })->first();
 
 
@@ -63,9 +59,6 @@ class UserController extends Controller
         }
         if ($profile_index == null) {
             Permission::create(['name'=>'profile-index']);
-        }
-        if ($profile_update == null) {
-            Permission::create(['name'=>'profile-update']);
         }
 	}
 

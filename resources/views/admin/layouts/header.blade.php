@@ -101,7 +101,9 @@
                         <p class="text-muted mb-0">{{trim( Auth::user()->getRoleNames(), '"[]')}}</p>
                     </div>
                 </div>
-                <a class="dropdown-item" href="{{ route('profile') }}">My Profile</a>
+                @can('profile-index')
+                    <a class="dropdown-item" href="{{ route('profile') }}">My Profile</a>
+                @endcan
                 <a class="dropdown-item" href="{{ route('website-setting.edit') }}">Setting</a>
                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
             </div>

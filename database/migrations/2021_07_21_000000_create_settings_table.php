@@ -26,7 +26,7 @@ class CreateSettingsTable extends Migration
                 $table->string('meta_description')->nullable();
                 $table->string('meta_tag')->nullable();
     
-                $table->biginteger('currency_id')->unsigned()->nullable();
+                $table->foreignId('currency_id')->nullable()->constrained()->onDelete('set null');
     
                 $table->text('address')->nullable();
                 $table->string('phone')->nullable();
@@ -38,8 +38,6 @@ class CreateSettingsTable extends Migration
                 $table->string('instagram')->nullable();
                 $table->string('github')->nullable();
                 $table->timestamps();
-    
-                $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('set null');
             });
         }
     }

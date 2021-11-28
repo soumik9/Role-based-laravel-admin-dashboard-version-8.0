@@ -28,6 +28,8 @@ class RolePermissionSeeder extends Seeder
             'user-edit',
             'user-delete',
 
+            'profile-index',
+
             'role-list',
             'role-create',
             'role-edit',

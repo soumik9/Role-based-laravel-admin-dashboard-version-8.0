@@ -21,7 +21,7 @@
 				@if (Gate::check('role-create'))
 					<div class="col-md-3">
 						<div class="create-btn pull-right">
-							<a href="{{ route('roles.create') }}" class="btn custom-create-btn">{{ __('default.form.add-button') }}</a>
+							<a href="{{ route('roles.create') }}" class="btn custom-create-btn">{{ __('role.form.add-button') }}</a>
 						</div>
 					</div>
 				@endif

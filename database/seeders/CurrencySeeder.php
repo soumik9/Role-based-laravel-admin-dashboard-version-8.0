@@ -14,11 +14,15 @@ class CurrencySeeder extends Seeder
      */
     public function run()
     {
-        Currency::create([
-            'name'   => 'Bangladeshi Taka',
-            'code'   => 'BDT',
-            'symbol' => '৳',
-            'status' => 1
-        ]);
+        $currency = Currency::Where('code', 'BDT')->first();
+        if(is_null($currency))
+        {
+            Currency::create([
+                'name'   => 'Bangladeshi Taka',
+                'code'   => 'BDT',
+                'symbol' => '৳',
+                'status' => 1
+            ]);
+        }
     }
 }
