@@ -487,16 +487,20 @@ button.bg-danger:hover {
     /* border-color: #c4ab54!important; */
 }
 .btn-primary {
-	background-color: #c4ab54;
-    border: 1px solid #c4ab54;
+	background-color: #006266;
+    border: 1px solid #006266;
+	/* background-color: #c4ab54;
+    border: 1px solid #c4ab54; */
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary.active,
 .btn-primary:active,
 .open > .dropdown-toggle.btn-primary {
-	background-color: #c4ab54;
-	border: 1px solid #c4ab54;
+	background-color: #006266;
+    border: 1px solid #006266;
+	/* background-color: #c4ab54;
+	border: 1px solid #c4ab54; */
 }
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #fff;

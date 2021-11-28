@@ -7,9 +7,9 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Prison;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Brian2694\Toastr\Facades\Toastr;
 
 class LoginController extends Controller
 {
@@ -25,24 +25,13 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
-
 
     public function login()
     {
@@ -64,9 +53,7 @@ class LoginController extends Controller
             'password.required'     => __('auth.form.validation.email.required'),
         ];
 
-
         $data = $this->validate($request, $rules, $messages);
-
 
         if (!isset(request()->remember)) {
             $data['remember'] = "off";
@@ -74,18 +61,18 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']], $request->get('remember'))) {
             if (Auth::user()->status == 1) {
+                Toastr::success('Welcome !');
                 return redirect()->intended('/admin/dashboard');
             }else{
                 Auth::logout();
-                return redirect()->back()->with('danger','Your account is Deactivated by Admin!');
+                Toastr::error('Your account is Deactivated by Admin!');
+                return redirect()->back();
             }
         }else{
-            return redirect()->back()->with('danger','Credentials Missmatch!');
+            Toastr::error('Credentials Missmatch!');
+            return redirect()->back();
         }
-    
     }
-
-
 
     public function logout(Request $request) {
         Auth::logout();

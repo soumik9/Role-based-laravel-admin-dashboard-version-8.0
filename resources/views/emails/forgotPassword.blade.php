@@ -22,15 +22,13 @@
 </style>
 
 
-
-<table width="100%" style="min-height: 400px; padding: 50px; margin: 0; background: linear-gradient(180deg, #1b5a90, #00d0f1); color: #fff">
+<table width="100%" style="min-height: 400px; padding: 50px; margin: 0; background: linear-gradient(180deg, #1b5a90, #006266); color: #fff">
   
-  <!-- START OF FEATURED AREA BLOCK-->
   <tr>
     <td style="width: 100%; text-align: center;">
 
 		@if(empty($setting->website_logo_light))
-			<img src="{{asset('/assets/frontend/img/logo.png')}}" style="width: 120px;">
+			<img src="{{asset('/assets/admin/img/logo-def.png')}}" style="width: 120px;">
 		@else
 			<img src="{{$setting->website_logo_light}}" style="width: 120px;">
 		@endif
@@ -38,11 +36,7 @@
 
 		<h3>Forget Password Email</h3>
 		<p>You can reset password from bellow link: <a href="{{ route('reset.password.get', $token) }}">Reset Password</a></p>
-
-
-
     </td>
-  </tr>
-  <!-- END OF 3 COL FEATURED PRODUCT OR GALLERY-->
-  
+  </tr> 
+
 </table>

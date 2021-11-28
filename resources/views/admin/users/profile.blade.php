@@ -20,7 +20,7 @@
 			    	<div class="col-md-3">
 						<div class="pull-right">
 							<button type="submit" class="btn custom-create-btn ">
-								<i data-feather="save" class="feather-icon"></i> {{__('default.form.save-button')}}
+								{{__('default.form.update-button')}}
 							</button>
 						</div>  		
 			    	</div>
