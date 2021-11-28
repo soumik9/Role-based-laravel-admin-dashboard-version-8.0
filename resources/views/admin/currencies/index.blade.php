@@ -28,11 +28,13 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-3">
-					<div class="create-btn pull-right">
-						<a href="{{ route('currencies.create') }}" class="btn custom-create-btn">{{ __('currency.form.add-button') }}</a>
+				@if (Gate::check('currency-create'))
+					<div class="col-md-3">
+						<div class="create-btn pull-right">
+							<a href="{{ route('currencies.create') }}" class="btn custom-create-btn">{{ __('currency.form.add-button') }}</a>
+						</div>
 					</div>
-				</div>
+				@endif
 			</div>
 		</div><!-- /card finish -->	
 	</div><!-- /Page Header -->

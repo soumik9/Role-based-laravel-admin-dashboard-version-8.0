@@ -1,7 +1,9 @@
 @extends('admin.layouts.master')
+
 @section('page_title')
     {{__('permission.index.title')}}
 @endsection
+
 @section('content')
 	<!-- Page Header -->
 	<div class="page-header">
@@ -18,11 +20,13 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-3">
-					<div class="create-btn pull-right">
-						<a href="{{ route('permissions.create') }}" class="btn custom-create-btn">{{ __('permission.form.add-button') }}</a>
+				@if (Gate::check('permission-create'))
+					<div class="col-md-3">
+						<div class="create-btn pull-right">
+							<a href="{{ route('permissions.create') }}" class="btn custom-create-btn">{{ __('permission.form.add-button') }}</a>
+						</div>
 					</div>
-				</div>
+				@endif
 			</div>
 		</div><!-- /card finish -->	
 	</div><!-- /Page Header -->

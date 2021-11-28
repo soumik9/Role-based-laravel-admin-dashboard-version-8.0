@@ -29,11 +29,13 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-3">
-					<div class="create-btn pull-right">
-						<a href="{{ route('cmspages.create') }}" class="btn custom-create-btn">{{ __('cms.form.add-button') }}</a>
+				@if (Gate::check('cmspage-create'))
+					<div class="col-md-3">
+						<div class="create-btn pull-right">
+							<a href="{{ route('cmspages.create') }}" class="btn custom-create-btn">{{ __('cms.form.add-button') }}</a>
+						</div>
 					</div>
-				</div>
+				@endif
 			</div>
 		</div><!-- /card finish -->	
 	</div><!-- /Page Header -->

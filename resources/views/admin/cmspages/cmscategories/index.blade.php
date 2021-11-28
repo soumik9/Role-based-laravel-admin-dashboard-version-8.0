@@ -28,11 +28,13 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-3">
-					<div class="create-btn pull-right">
-						<a href="{{ route('cmscategories.create') }}" class="btn custom-create-btn">{{ __('cmscategory.form.add-button') }}</a>
+				@if (Gate::check('cmscategory-create'))
+					<div class="col-md-3">
+						<div class="create-btn pull-right">
+							<a href="{{ route('cmscategories.create') }}" class="btn custom-create-btn">{{ __('cmscategory.form.add-button') }}</a>
+						</div>
 					</div>
-				</div>
+				@endif
 			</div>
 		</div><!-- /card finish -->	
 	</div><!-- /Page Header -->

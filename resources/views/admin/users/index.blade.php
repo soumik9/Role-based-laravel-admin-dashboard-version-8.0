@@ -28,15 +28,16 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-3">
-					<div class="create-btn pull-right">
-						<a href="{{ route('users.create') }}" class="btn custom-create-btn">{{ __('default.form.add-button') }}</a>
-					</div>
-				</div>
+                @if (Gate::check('user-create'))
+                    <div class="col-md-3">
+                        <div class="create-btn pull-right">
+                            <a href="{{ route('users.create') }}" class="btn custom-create-btn">{{ __('default.form.add-button') }}</a>
+                        </div>                 
+                    </div>
+                @endif
 			</div>
 		</div><!-- /card finish -->	
 	</div><!-- /Page Header -->
-
 
     <div class="row">
         <div class="col-md-12">
