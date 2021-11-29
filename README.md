@@ -44,7 +44,7 @@ To see the progress report of this project, [Project report](https://docs.google
     </b> <br>
   
 2. Create database and Edit '.env' <br>
-3. Go to 'bootstrap' folder -> then 'cache' folder and delete everything inside folder
+3. Go to 'bootstrap' folder -> then 'cache' folder and delete everything inside folder. (If 'cache' folder is not available then make this folder)
 4. If 'storage' folder doesn't exist then make 'storage' folder and inside 'storage' folder make these folder 'app', 'framework', 'log'. Inside 'app' folder make 'public'
    folder. Inside 'framwork' folder make these folder 'cache', 'sessions', 'testing', 'views'. Inside 'cache' folder make 'data' folder.
 5. If 'storage' folder exist then delete all files inside these folder 'cache', 'sessions', 'testing', 'views'. And make sure inside 'cache' folder there exist 'data' folder.
